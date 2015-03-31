@@ -92,6 +92,7 @@ module Impostor
         location_result = find_location states, zip_codes
 
         location ={
+          street: Faker::Address.street_address,
           city: location_result["#{@config[:location_db][:column_mapping][:city]}"],
           state: location_result["#{@config[:location_db][:column_mapping][:state]}"],
           state_abbr: location_result["#{@config[:location_db][:column_mapping][:state_abbr]}"],
