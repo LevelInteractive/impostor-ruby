@@ -1,13 +1,13 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'impostor/ruby/version'
+require 'impostor-ruby/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "impostor-ruby"
-  spec.version       = Impostor::Ruby::VERSION
+  spec.version       = Impostor::VERSION
   spec.authors       = ["Bill Watts"]
-  spec.email         = ["bwatts@level-interactive.com"]
+  spec.email         = ["william.lane.watts@gmail.com"]
 
   spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
   spec.description   = %q{TODO: Write a longer description or delete this line.}
@@ -25,4 +25,9 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.9"
   spec.add_development_dependency "rake", "~> 10.0"
+
+  spec.add_runtime_dependency "faker", "~> 1.4.3"
+  spec.add_runtime_dependency "mysql2", "~> 0.3.18"
+  spec.add_runtime_dependency "activesupport", "~> 4.2.1"
+  spec.add_runtime_dependency "twilio-ruby", "~> 3.15.2"
 end
