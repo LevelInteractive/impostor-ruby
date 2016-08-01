@@ -14,7 +14,7 @@ module Impostor
     # friendly name of a Twilio phone number. Area code is used when search for local Twilio numbers.
     # End result a phone number.
     def number(twilio=false, name=nil, area_code=nil)
-      if twilio 
+      if twilio
         # Check if twilio configuration exists.  If not throw and errors because twilio was passed as true.
         if !@config[:configuration][:twilio].blank? and (!@config[:configuration][:twilio][:account_id].blank? and !@config[:configuration][:twilio][:api_key].blank?)
           account = @config[:configuration][:twilio][:account_id]
@@ -42,16 +42,20 @@ module Impostor
             phone_number = available_number.phone_number.gsub("+1","")
             phone_number = "#{phone_number[0..2]}-#{phone_number[3..5]}-#{phone_number[6..10]}"
 
-            # Put together the voicemail Twimil.
-            voice_message = "http://twimlets.com/voicemail?Email=bwatts%40level.agency&Message=You%20reached%20the%20voicemail%20box%20of%20#{phone_number}.%20%20Please%20leave%20a%20message%20after%20the%20beep.&Transcribe=true&"
 
-            # Here we buy the number, set the voice_url to the voicemail Twimil and set the 
+            # Setting the transciption email
+            email = @config[:configuration][:twilio][:transcription_email].blank? ? "" : @config[:configuration][:twilio][:transcription_email]
+
+            # Put together the voicemail Twimil.
+            voice_message = "http://twimlets.com/voicemail?Email=#{email}&Message=You%20reached%20the%20voicemail%20box%20of%20#{phone_number}.%20%20Please%20leave%20a%20message%20after%20the%20beep.&Transcribe=true&"
+
+            # Here we buy the number, set the voice_url to the voicemail Twimil and set the
             # sms_url to echo so Twilio will capture the message but not reply to it.
             number = twilio.account.incoming_phone_numbers.create({
-              phone_number: available_number.phone_number, 
-              friendly_name: name, 
-              voice_url: voice_message, 
-              voice_method: "GET", 
+              phone_number: available_number.phone_number,
+              friendly_name: name,
+              voice_url: voice_message,
+              voice_method: "GET",
               sms_url: "http://twimlets.com/echo?Twiml=%3CResponse%3E%3C%2FResponse%3E",
               sms_method: "GET"
             })
