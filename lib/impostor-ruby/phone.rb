@@ -44,7 +44,7 @@ module Impostor
 
 
             # Setting the transciption email
-            email = @config[:configuration][:twilio][:transcription_email].blank? ? "" : @config[:configuration][:twilio][:transcription_email]
+            email = @config[:configuration][:twilio][:transcription_email].blank? ? "developers@level.agency" : @config[:configuration][:twilio][:transcription_email]
 
             # Put together the voicemail Twimil.
             voice_message = "http://twimlets.com/voicemail?Email=#{email}&Message=You%20reached%20the%20voicemail%20box%20of%20#{phone_number}.%20%20Please%20leave%20a%20message%20after%20the%20beep.&Transcribe=true&"
