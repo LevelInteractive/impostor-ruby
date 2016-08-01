@@ -5,6 +5,7 @@ module Impostor
   require 'mysql2'
   require 'active_support/all'
   require 'twilio-ruby'
+  require 'uri'
 
   require 'impostor-ruby/address'
   require 'impostor-ruby/internet'
